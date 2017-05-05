@@ -1,0 +1,26 @@
+{
+  "name": "recipes_app",
+  "version": "1.0.0",
+  "description": "recipes app",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mthintoncoding/Ingredients_App.git"
+  },
+  "keywords": [
+    "recipes",
+    "ingredients"
+  ],
+  "author": "Matthew Hinton",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mthintoncoding/Ingredients_App/issues"
+  },
+  "homepage": "https://github.com/mthintoncoding/Ingredients_App#readme",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}

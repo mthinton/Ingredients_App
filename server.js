@@ -7,6 +7,10 @@ app.get('/', (req, res) => {
 	res.status(200).json({message: 'hello world'});
 })
 
+app.get('/welcomescreen', (req, res) => {
+	res.status(200).json({message: 'hello world'});
+})
+
 app.listen(process.env.PORT || 8080);
 
 module.exports = {app};

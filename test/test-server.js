@@ -16,3 +16,13 @@ describe('indexpage', function(){
 		
 	});
 });
+
+describe('welcomescreen', function(){
+	it('should display Welcome to my app!', function{
+		return chai.request(app)
+		.get('/welcomescreen')
+		.then(function(res){
+			res.should.have.status(200);
+		})
+	})
+})

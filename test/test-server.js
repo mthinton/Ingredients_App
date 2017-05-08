@@ -26,3 +26,23 @@ describe('welcomescreen', function(){
 		})
 	})
 })
+
+describe('searchscreen', function(){
+	it('should have a search bar that returns some recipes', function(){
+		return chai.request(app)
+		.get('/searchscreen')
+		.then(function(res){
+			res.should.have.status(200);
+		})
+	})
+})
+
+describe('searchresults', function(){
+	it('should display search results', function(){
+		return chai.request(app)
+		.get('/searchresults')
+		.then(function(res){
+			res.should.have.status(200);
+		})
+	})
+})

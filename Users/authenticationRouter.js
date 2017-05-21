@@ -36,15 +36,8 @@ passport.use(basicStrategy);
 router.use(passport.initialize());
 
 router.post('/', (req, res) => {
-	console.log(req.body);
-	if(!req.body){
-		return res.status(400).json({message: 'No request body'});
-	}
 
-	if(!('username' in req.body)){
-		return res.status(422).json({message: 'Missing field: username'});
-	}
-
+console.log(req.body);
 let {username, password, firstName, lastName} = req.body;
 
 return User
@@ -75,17 +68,8 @@ return User
 	});
 });
 
-router.get('/', (req, res) => {
-	return User
-	.find()
-	.exec()
-	.then(users => res.json(users.map(user => user.apiRepr())))
-	.catch(err => console.log(err) && res.status(500).json({message: 'Internal server error'}));
-});
-
-router.get('/me', 
-	passport.authenticate('basic',  {session: false}),
-	(req, res) => res.json({user: req.user.apiRepr()})
+router.get('/', passport.authenticate('basic',  {session: false}), (req, res) => 
+	res.json({user: req.user.apiRepr()})
 	);
 
 module.exports = {router};

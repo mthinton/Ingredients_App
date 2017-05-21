@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const {DATABASE_URL} = require('./config');
 
-const {router} = require('./Users/router');
+const {router} = require('./Users/authenticationRouter');
+const {user} = require('./Users/models');
 
 mongoose.Promise = global.Promise;
 
@@ -21,14 +22,6 @@ app.use(express.static('public'));
 
 app.get('/', (req, res) => {
 	res.status(200).json({message: 'hello world'});
-})
-
-app.get('/welcomescreen', (req, res) => {
-	res.status(200).json({message: 'hello world'});
-})
-
-app.get('/searchscreen', (req, res) =>{
-	res.status(200).json({message: 'All the food, all the time'});
 })
 
 app.listen(process.env.PORT || 8080, () => {

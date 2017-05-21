@@ -14,14 +14,15 @@ const UserSchema = mongoose.Schema({
 		required: true,
 	},
 	firstName: {type: String, default: ""},
-	lastName: {type: String, default: ""}
+	lastName: {type: String, default: ""},
+	recipes: {type: Array}
 });
 
 UserSchema.methods.apiRepr = function(){
 	return{
 		username: this.username || '',
 		firstName: this.firstName || '',
-		lastName: this.lastName || ''
+		lastName: this.lastName || '',
 	};
 }
 

@@ -16,23 +16,3 @@ describe('indexpage', function(){
 		
 	});
 });
-
-describe('welcomescreen', function(){
-	it('should display Welcome to my app!', function(){
-		return chai.request(app)
-		.get('/welcomescreen')
-		.then(function(res){
-			res.should.have.status(200);
-		})
-	})
-})
-
-describe('searchscreen', function(){
-	it('should have a search bar that returns some recipes', function(){
-		return chai.request(app)
-		.get('/searchscreen')
-		.then(function(res){
-			res.should.have.status(200);
-		})
-	})
-})

@@ -1,54 +1,73 @@
-const MOCK_RECIPES =
-{//Here we create schema for what client expects in return from API request
+function getDataFromEdamam (query, callback){
+	$.getJSON('https://api.edamam.com/search?q='+query+'&app_id=6ede496c&app_key=c92d2cef61b509dc0805cfc788b6a213', callback);
+}
 
-	"hits": [	
-	{
-		"label": "Teriyaki Chicken",
-		"url": "http://www.davidlebovitz.com/chicken-teriyaki-recipe-japanese-farm-food/",
-		"image": "https://www.edamam.com/web-img/c8e/c8e021a608c2f51b6af1e20e6d58fb3b.jpg",
-		"ingredientLines": [ 
-		"1/2 cup (125ml) mirin",
-		"1/2 cup (125ml) soy sauce",
-		"One 2-inch (5cm) piece of fresh ginger, peeled and grated",
-		"2-pounds (900g) boneless chicken thighs (4-8 thighs, depending on size)"
-		]
-	},
-
-	{
-		"label": "Chicken Vesuvio",
-		"url": "http://www.seriouseats.com/recipes/2011/12/chicken-vesuvio-recipe.html",
-		"image": "https://www.edamam.com/web-img/eb5/eb5985a8a19a9fc72b0cf627282199ed.jpg",
-		"ingredientLines":[
-		"1/2 cup olive oil",
-        "5 cloves garlic, peeled",
-         "2 large russet potatoes, peeled and cut into chunks",
-         "1 3-4 pound chicken, cut into 8 pieces (or 3 pound chicken legs)",
-         "3/4 cup white wine",
-         "3/4 cup chicken stock",
-         "3 tablespoons chopped parsley",
-         "1 tablespoon dried oregano",
-         "Salt and pepper",
-         "1 cup frozen peas, thawed"
-			]
+function displaySearchResults(data){
+	console.log(data);
+	var resultElement = '';
+	if(data){
+		data.hits.forEach(function(item){
+			resultElement += '<p>' + item.recipe.label +'</p>';
+			resultElement += '<p>' + item.recipe.ingredientLines + '</p>';
+			resultElement += '<img src='+item.recipe.image+'>';
+			resultElement += '<a href='+ item.recipe.url +'> Link </a>';
+		});
 	}
-	]
-};
-
-function getRecipes(callbackFn){
-	setTimeout(function(){callbackFn(MOCK_RECIPES)},100);
+	else{
+		resultElement += '<p>' + 'No results' + '</p>';
+	}
+	$('.results_section').html(resultElement);
 }
 
-function displayRecipeResults(data){
-		data.hits.forEach(function(recipe){
-			$('.results').append('<li>' + recipe.label + '<img src=" '+ recipe.image+'">' +'<br>' +  ' Ingredients: ' + recipe.ingredientLines + '</n>' + '<br>' + '<a href=" '+recipe.url+'">Link to Instructions</a>' + '</li>');
+
+	$('.registration_form').submit(function(e){
+		e.preventDefault();
+		const newUser = {
+		username : $('#username').val(),
+		password : $('#password').val(),
+		firstName: $('#firstName').val(),
+		lastName: $('#lastName').val()
+		};
+	$.ajax({
+      type: 'POST',
+      url: '/users',
+      data: newUser,
+      success: function() {
+      	window.location = '/loginScreen.html';
+      }
+		});
 	})
+
+	$('.login_form').submit(function(e){
+		e.preventDefault();
+		const user = {
+			username : $('#login_username').val(),
+			password : $('#login_password').val()
+		};
+		$.ajax({
+			type: 'GET',
+			url: '/users',
+			data: user,
+			success: function(data){
+				console.log(data);
+				window.location = '/searchscreen.html'
+			}
+		})
+	})
+
+	//save a recipe will update the user. Do that by doing a post
+	//another post endpoint, will send recipe to save and my job is to find user. Update the user by adding.
+	//how to get logged in user passport
+	//find user in database
+	////Insert object into array
+	
+
+function watchSubmit(){
+	$('.search_edamam').submit(function(e){
+		e.preventDefault();
+		var query = $(this).find('#recipe_name').val();
+		getDataFromEdamam(query, displaySearchResults);
+	});
 }
 
-function getAndDisplayRecipeResults(){
-	getRecipes(displayRecipeResults);
-}
-
-$(function(){
-	getAndDisplayRecipeResults();
-})
-
+$(function(){watchSubmit();});

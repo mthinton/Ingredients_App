@@ -1,19 +1,20 @@
 const {BasicStrategy} = require('passport-http');
-const express = require('express');
-const jsonParser = require('body-parser');
+const bodyParser = require('body-parser');
 const passport = require('passport');
+const session = require('express-session');
+const express = require('express');
+
 
 const {User} = require('./models');
 
 const router = express.Router();
 
-router.use(jsonParser.urlencoded({ extended: true }));
-router.use(jsonParser.json());
+router.use(bodyParser.urlencoded({ extended: true }));
+router.use(bodyParser.json());
 
-const basicStrategy = new BasicStrategy((username, password, callback) => {
+const basicStrategy = new BasicStrategy(function(username, password, callback){
 	let user;
-	User
-	.findOne({username: username})
+	User.findOne({username: username})
 	.exec()
 	.then(_user => {
 		user = _user;
@@ -23,22 +24,23 @@ const basicStrategy = new BasicStrategy((username, password, callback) => {
 		return user.validatePassword(password);
 	})
 	.then(isValid => {
-		if(!isValid) {
-		return callback(null, false, {message: 'Incorrect password'});
+		if(!isValid){
+			return callback(null, false, {message: 'Incorrect password'});
 		}
-		else{
+		else {
 			return callback(null, user)
-		}	
+		}
 	});
 });
 
-passport.use(basicStrategy);
 router.use(passport.initialize());
+router.use(passport.session());
+passport.use(basicStrategy);
+
 
 router.post('/', (req, res) => {
 
-console.log(req.body);
-let {username, password, firstName, lastName} = req.body;
+	let {username, password, firstName, lastName} = req.body;//those 4 properties being picked out from req.body from AJAX request
 
 return User
 .find({username})
@@ -60,7 +62,6 @@ return User
 		})
 	})
 	.then(user => {
-		console.log(user);
 		return res.status(201).json(user.apiRepr());
 	})
 	.catch(err => {
@@ -68,8 +69,36 @@ return User
 	});
 });
 
-router.get('/', passport.authenticate('basic',  {session: false}), (req, res) => 
-	res.json({user: req.user.apiRepr()})
-	);
+router.post('/cars', (req, res) => {
+	const newUser = new User()
+
+	newUser.firstName = 'Bmw'
+	newUser.lastName = 2017
+
+	newUser.save((err, record) => {
+			if(err){
+				res.send(err)
+			}
+			res.json(record)
+	})
+})
+
+router.get('/',
+		passport.authenticate('basic', {session: false}),
+		(req, res) => res.json({user: req.user})
+);
+	
+
+router.get('/logout', function(req, res){
+	req.session.destroy(function(err){
+		if(err){
+			console.log('error: ', err);
+		}else{
+			console.log('req.session: ', req.user)
+			req.logout();
+			res.redirect('/');
+		}
+	});
+});
 
 module.exports = {router};

@@ -1,0 +1,16 @@
+*{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	vertical-align: baseline;
+}
+
+body{
+	background-image: url('http://www.comicbookgrrrl.com/wp-content/uploads/2014/01/ashes.jpg');
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	color: white;
+	font-size: 20px;
+
+}

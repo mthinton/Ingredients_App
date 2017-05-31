@@ -21,7 +21,10 @@
   },
   "homepage": "https://github.com/mthintoncoding/Ingredients_App#readme",
   "dependencies": {
-    "express": "^4.15.2"
+    "connect": "^3.6.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.2",
+    "serve-static": "^1.12.3"
   },
   "devDependencies": {
     "bcryptjs": "^2.4.3",

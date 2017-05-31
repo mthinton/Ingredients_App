@@ -1,7 +1,8 @@
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const UserSchema = mongoose.Schema({
+const UserSchema = new Schema({
 	username: {
 		type: String,
 		required: true,
@@ -9,20 +10,13 @@ const UserSchema = mongoose.Schema({
 	},
 	password: {
 		type: String,
-		required: true,
+		required: true
 	},
-	firstName: {type: String, default: ""},
-	lastName: {type: String, default: ""},
-	recipes: {type: Array}
+	firstName: String,
+	lastName: String,
+	recipes: Array
 });
-
-UserSchema.methods.apiRepr = function(){
-	return{
-		username: this.username || '',
-		firstName: this.firstName || '',
-		lastName: this.lastName || '',
-	};
-}
+//mongoose data types
 
 UserSchema.methods.validatePassword = function(password){
 	return bcrypt.compare(password, this.password);

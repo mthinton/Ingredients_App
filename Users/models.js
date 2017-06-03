@@ -14,9 +14,12 @@ const UserSchema = new Schema({
 	},
 	firstName: String,
 	lastName: String,
-	recipes: Array
+	savedRecipes: [
+	{
+		label: {type: String}
+	}]
 });
-//mongoose data types
+
 
 UserSchema.methods.validatePassword = function(password){
 	return bcrypt.compare(password, this.password);

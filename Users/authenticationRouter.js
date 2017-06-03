@@ -5,15 +5,20 @@ const session = require('express-session');
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const serveStatic = require('serve-static');
+const mongoose = require('mongoose');
 
 
 const {User} = require('./models');
 
 const router = express.Router();
 
+mongoose.Promise = global.Promise;
+
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
+
+
 
 
  passport.use(new LocalStrategy(
@@ -30,29 +35,52 @@ router.use(bodyParser.json());
     });
   }
 )); 
-router.use(session({
+
+ router.use(session({
 	secret: 'keyboard cat',
-	resave: true,
-	saveUninitialized: true
+	resave: false,
+	saveUninitialized: false,
+	cookie: {}
 }));
 
 router.use(passport.initialize());
 router.use(passport.session());
-
-router.get('/', (req, res) => {
-	res.send('hello world');
-})
 
 passport.serializeUser(function (user, done) {
     done(null, user.id);
     //log in, send back to client
 });
 
-passport.deserializeUser(function (user, done) {
-    User.findById(_id, function (err, user) {
+passport.deserializeUser(function (id, done) {
+    User.findById(id, function (err, user) {
         done(err, user);
     });
 });
+
+router.get('/', (req, res) => {
+	return User
+	.find()
+	.exec()
+	.then(users => {
+		return res.status(200).json(users);
+	})
+	.catch(err => {
+		res.status(500).json({message: 'Internal server'})
+	})
+})
+
+
+router.put('/', (req, res) =>{
+	User
+	.findByIdAndUpdate(
+		req.session.passport.user,
+		{$push: {savedRecipes: {label: req.body.recipe.label}}},
+		{safe: true, upsert: true, new : true},
+	 function (err, record) {
+	 	res.json({record});
+	});
+
+ });
 
 router.post('/', (req, res) => {
 
@@ -76,6 +104,7 @@ return User
 			firstName: firstName,
 			lastName: lastName
 		});
+
 	})
 	.then(user => {
 		return res.status(201).json(user);
@@ -85,24 +114,16 @@ return User
 	});
 });
 
-router.put('/:id', (req, res) => {
-		users.update({
-			id: req.params.id,
-			recipes: [req.body.title]
-		})
-		res.status(204).end();
-	});
+
 
  router.get('/existing',
-  passport.authenticate('local', { session: false }),
+  passport.authenticate('local', { session: true }),
   function(req, res) {
-  	console.log(req.user)
-    res.json({ id: req.user.id, username: req.user.username });
+    res.json({ id: req.user._id, username: req.user.username });
   });
 	
 
  router.get('/logout', function(req, res) {
- 	console.log('hello world');
 	req.session.destroy(function (err) {
 		if(err){
 			res.send(err);

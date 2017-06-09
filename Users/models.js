@@ -16,7 +16,8 @@ const UserSchema = new Schema({
 	lastName: String,
 	savedRecipes: [
 	{
-		label: {type: String}
+		label: {type: String},
+		image: {type: String}
 	}]
 });
 

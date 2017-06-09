@@ -2,11 +2,31 @@
 <html>
 <head>
 	<title>Ingredients App</title>
+	<link rel='stylesheet' href='main.css'>
 </head>
-<header>
-	<button class='logout-button'>Logout</button>
-</header>
-<body>
+
+<body class='search_Body'>
+<nav>
+<ul>
+	<li><a href='index.html'>Home</a></li>
+	<li><a href='login.html'>Login</a></li>
+	<li><a href='about.html'>About</a></li>
+	<li><a href='savedRecipes.html'>Saved Recipes</a></li>
+	
+	<button type="button" class='logout_button'>Logout</button>
+	
+	</ul>
+
+</nav>
+
+<div class="dropdown">
+  <button onclick="myFunction()" class="dropbtn">Saved Recipes</button>
+  <div id="myDropdown" class="dropdown-content">
+  </div>
+</div>
+
+	
+
 <form class='search_edamam' id='form'>
 
 	<label for='recipe_name'>Recipe Name</label>

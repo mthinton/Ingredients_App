@@ -58,29 +58,35 @@ passport.deserializeUser(function (id, done) {
 });
 
 router.get('/', (req, res) => {
-	return User
-	.find()
-	.exec()
-	.then(users => {
-		return res.status(200).json(users);
-	})
-	.catch(err => {
-		res.status(500).json({message: 'Internal server'})
-	})
+	User
+	.findById(req.session.passport.user, function(err, user){
+		var obj = {savedRecipes: user.savedRecipes}
+		res.status(200).json({savedRecipes: user.savedRecipes})
+		})
 })
-
 
 router.put('/', (req, res) =>{
 	User
 	.findByIdAndUpdate(
 		req.session.passport.user,
-		{$push: {savedRecipes: {label: req.body.recipe.label}}},
+		{$push: {savedRecipes: {label: req.body.recipe.label, image: req.body.recipe.image}}},
 		{safe: true, upsert: true, new : true},
 	 function (err, record) {
 	 	res.json({record});
 	});
 
  });
+
+router.put('/deleteRecipe/', (req,res) => {
+	User
+	.findByIdAndUpdate(
+		req.session.passport.user,
+		{$pull: {savedRecipes: {_id: req.user.savedRecipes._id}}},
+
+	function(err, user){
+		res.json({message: req.user.savedRecipes._id});
+	})
+})
 
 router.post('/', (req, res) => {
 

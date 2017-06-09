@@ -2,32 +2,40 @@
 <html>
 <head>
 	<title>Login Screen</title>
+	<link rel='stylesheet' href='main.css'>
 </head>
-<header>
-	<a href='index.html'>Home</a>
-</header>
-<body>
+<nav>
+	<ul>
+	<li><a href='index.html'>Home</a></li>
+	<li><a href='login.html'>Login</a></li>
+	<li><a href='about.html'>About</a></li>
+	</ul>
+</nav>
+<body class='login_body'>
 <form class='login_form'>
 
-<label for='login_username'>username</label>
+<label for='login_username'>Username</label>
 	<input id='login_username' type='text'>
 	<br>
 	<br>
 	<br>
-<label for='password'>password</label>
+<label for='password'>Password</label>
 	<input id='login_password' type='text'>
 <br>
 <br>
 <br>
-<button type='submit' value='submit'>Submit</button>
-<p>No account yet? Click below to create</p>
+<button type='submit' class='passwordSubmitButton' value='submit'>Submit</button>
+
 
 </form>
 
-<a href='registration.html'><button>Click here to Get Started</button></a>
+<div class='account_Registration'>
+<p>No account yet? Click below to create</p>
+<a href='registration.html'><button class='accountRegistrationButton'>Click here to create account</button></a>
+</div>
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-<script src='app.js'></script>
+<script src='login.js'></script>
 </body>
 
 </html>

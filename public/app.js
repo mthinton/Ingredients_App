@@ -1,11 +1,18 @@
 let searchResults = [];
-let user_id = '';
+
+function watchSubmit(){
+	$('.search_edamam').submit(function(e){
+		e.preventDefault();
+		var query = $(this).find('#recipe_name').val();
+		getDataFromEdamam(query, displaySearchResults);
+	});
+}
 
 function getDataFromEdamam (query, callback){
 	$.getJSON('https://api.edamam.com/search?q='+query+'&app_id=6ede496c&app_key=c92d2cef61b509dc0805cfc788b6a213', callback);
 }
 
-	$('.logout-button').on('click', function(event) {
+	$('.logout_button').on('click', function(event) {
 		$.ajax({
 			type: 'GET',
 			url: '/users/logout',
@@ -17,41 +24,6 @@ function getDataFromEdamam (query, callback){
 		})
 
 	});
-
-
-	$('.registration_form').submit(function(e){
-		e.preventDefault();
-		const newUser = {
-		username : $('#username').val(),
-		password : $('#password').val(),
-		firstName: $('#firstName').val(),
-		lastName: $('#lastName').val()
-		};
-	$.ajax({
-      type: 'POST',
-      url: '/users',
-      data: newUser,
-      success: function() {
-      	window.location = '/login.html';
-      }
-		});
-	})
-
-	$('.login_form').submit(function(e){
-		e.preventDefault();
-		const user = {
-			username : $('#login_username').val(),
-			password : $('#login_password').val()
-		};
-		$.ajax({
-			type: 'GET',
-			url: '/users/existing',
-			data: user,
-			success: function(data){//data is response from server. I have access to response in callback function
-				window.location = '/search.html'
-			}
-		});
-	})
 
 	function displaySearchResults(data){
 	var resultElement = '';
@@ -77,6 +49,7 @@ function getDataFromEdamam (query, callback){
 
 	$('.save-recipe-button').click(function() {
 		const favoriteRecipeId = $(this).parent().find('.recipe-id').val();
+		console.log(favoriteRecipeId);
 		const recipe = searchResults[favoriteRecipeId];
 		$.ajax({
 			type: 'PUT',
@@ -90,24 +63,38 @@ function getDataFromEdamam (query, callback){
 
 }
 
-	//endpoint that does two things
-//find what user is logged in passport authenticate using user model
-
-//once i find the user, how to update property for a user, using mongoose
-
-	//save a recipe will update the user. Do that by doing a post
-	//another post endpoint, will send recipe to save and my job is to find user. Update the user by adding.
-	//how to get logged in user passport
-	//find user in database
-	////Insert object into array
-	
-
-function watchSubmit(){
-	$('.search_edamam').submit(function(e){
-		e.preventDefault();
-		var query = $(this).find('#recipe_name').val();
-		getDataFromEdamam(query, displaySearchResults);
+	$( document ).ready(function() {//this adds to dropdown menu
+    let savedResultElements = '';
+    $.ajax({
+			type: 'GET',
+			url: '/users',
+			success: function(res){
+				for(let i = 0; i < res.savedRecipes.length; i++){
+					$('.dropdown-content').append('<a href="savedRecipes.html">'+ res.savedRecipes[i].label +'</a>');
+					$('.dropdown-content').append('<img src='+res.savedRecipes[i].image +'>');
+				}
+			}
+		})
 	});
+
+	function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
 }
+
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
+
 
 $(function(){watchSubmit();});

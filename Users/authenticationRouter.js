@@ -78,18 +78,18 @@ router.put('/', (req, res) =>{
  });
 
 router.put('/deleteRecipe/', (req,res) => {
+	console.log(req.body._id);
 	User
 	.findByIdAndUpdate(
 		req.session.passport.user,
-		{$pull: {savedRecipes: {_id: req.user.savedRecipes._id}}},
-
+		{$pull: {savedRecipes: {_id: req.body._id}}},
 	function(err, user){
 		res.json({message: req.user.savedRecipes._id});
 	})
 })
 
 router.post('/', (req, res) => {
-
+Name
 	let {username, password, firstName, lastName} = req.body;//those 4 properties being picked out from req.body from AJAX request
 
 return User
@@ -113,7 +113,10 @@ return User
 
 	})
 	.then(user => {
-		return res.status(201).json(user);
+		return res.status(201).json({username: user.username,
+									firstName: user.firstName,
+									lastName: user.lastName
+		});
 	})
 	.catch(err => {
 		res.status(500).json({message: 'Internal server error'})
@@ -125,7 +128,21 @@ return User
  router.get('/existing',
   passport.authenticate('local', { session: true }),
   function(req, res) {
-    res.json({ id: req.user._id, username: req.user.username });
+  	User
+  	.find({username: req.body.username})
+  	.exec()
+  	.then(function(user){
+  		if( user.validatePassword(req.body.password)){
+  			res.json({username: user.username})
+  		}
+  		else{
+  			res.sendStatus(403);
+  		}
+  	})
+  	.catch(function(err){
+  		res.send(err);
+  	})
+    
   });
 	
 

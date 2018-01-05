@@ -1,20 +1,17 @@
     function displayData(user) {
-        const content = [];
         let item = '';
         for (let i = 0; i < user.savedRecipes.length; i++) {
             item += '<div class="Display" >';
             item += '<input type="hidden" value="' + i + '" class="recindex">';
             item += '<a src="#">' + user.savedRecipes[i].label + '</a>';
             item += '<img src=' + user.savedRecipes[i].image + ' class="display_image">';
-            item += '<button type="button" class="delete_button">Delete Recipe </button>';
+            item += '<button type="button" class="delete_button btn btn-link">Delete Recipe </button>';
             item += '</div>';
-
-            content.push(item);
-
         }
-
+        
         $('.savedResultsSection').html(item);
-        console.log(user.savedRecipes);
+
+        
 
         $('.delete_button').click(function() {
             const recipeValue = ($(this).parent().find(".recindex").val());
@@ -24,8 +21,9 @@
                 url: 'users/deleteRecipe',
                 data: recToBeDeleted,
                 success: function(res) {
+                    console.log(res.user);
                     alert('Recipe Deleted');
-                    window.location = '/savedRecipes.html';
+                    displayData(res.user);
                 }
             })
         });

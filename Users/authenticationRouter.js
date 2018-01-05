@@ -78,18 +78,21 @@ router.put('/', (req, res) =>{
  });
 
 router.put('/deleteRecipe/', (req,res) => {
-	console.log(req.body._id);
 	User
-	.findByIdAndUpdate(
-		req.session.passport.user,
+	.findByIdAndUpdate(req.session.passport.user,
 		{$pull: {savedRecipes: {_id: req.body._id}}},
-	function(err, user){
-		res.json({message: req.user.savedRecipes._id});
-	})
+		(err, user) => {
+			User.findById(req.session.passport.user, (err, user) => {
+				if(err){
+					res.send(err);
+				}
+				res.json({user})
+				});
+			})
 })
 
 router.post('/', (req, res) => {
-Name
+
 	let {username, password, firstName, lastName} = req.body;//those 4 properties being picked out from req.body from AJAX request
 
 return User
@@ -133,7 +136,7 @@ return User
   	.exec()
   	.then(function(user){
   		if( user.validatePassword(req.body.password)){
-  			res.json({username: user.username})
+  			res.json({user});
   		}
   		else{
   			res.sendStatus(403);

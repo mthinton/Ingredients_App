@@ -49,7 +49,6 @@ function getDataFromEdamam (query, callback){
 
 	$('.save-recipe-button').click(function() {
 		const favoriteRecipeId = $(this).parent().find('.recipe-id').val();
-		console.log(favoriteRecipeId);
 		const recipe = searchResults[favoriteRecipeId];
 		$.ajax({
 			type: 'PUT',

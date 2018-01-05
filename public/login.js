@@ -8,8 +8,8 @@
 			type: 'GET',
 			url: '/users/existing',
 			data: user,
-			success: function(data){
-			console.log(data)//data is response from server. I have access to response in callback function
+			success: function(res){
+			console.log(res)//data is response from server. I have access to response in callback function
 				window.location = '/search.html'
 			}
 		});

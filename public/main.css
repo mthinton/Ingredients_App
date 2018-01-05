@@ -1,0 +1,225 @@
+*{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	vertical-align: baseline;
+}
+
+
+
+nav{
+	width: 100%;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #2c3e50;
+	position: fixed;
+	color: #4E342E;
+}
+
+ul{
+	display: inline-block;
+}
+
+li{
+	display: inline-block;
+}
+
+a{
+	font-family: 'Cormorant SC', serif;
+	color: white;
+	z-index: 100000;
+}
+
+.index_body{
+	background-image: url('http://cdn.images.express.co.uk/img/dynamic/11/590x/veg1-634257.jpg');
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	color: white;
+	font-size: 20px;
+	font-weight: bold;
+	font-family: 'Cormorant SC', serif;
+}
+
+.Headline{
+	padding-top: 50px;
+	margin-left: 100px;
+	margin-right: auto;
+	width: 400px;
+}
+
+.Greeting{
+	text-align: center;
+	padding-top: 100px;
+	margin-right: 500px;
+}
+
+.the-Rest{
+	margin-left: 100px;
+	margin-right: auto;
+	margin-top: 100px;
+	width: 400px;
+}
+
+.start-Button{
+    background-color: #2c3e50;/* Darkblue */
+    color: white;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: auto;
+    display: block;
+    border-radius: 5px;
+}
+
+.line{
+	width: 90%;
+	border-top: 1px solid black;
+	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.login_body{
+	background-image: url('https://i1.wp.com/www.wellmindness.com/wp-content/uploads/2016/03/vintage-book-recipe.jpg?resize=620%2C330');
+	background-repeat: no-repeat;
+	background-position: 250px 50px;
+	background-attachment: absolute;
+	background-size: 900px 600px;
+}
+
+.login_form{
+	padding-top: 50px;
+	text-align: center;
+	color: #2c3e50;
+	font-family: 'Cormorant SC', serif;
+}
+
+.passwordSubmitButton{
+	background-color: #2c3e50;/* Darkblue */
+    color: white;
+    border: none;
+    padding: 5px 8px;
+    text-decoration: none;
+    font-size: 12px;
+    margin: auto;
+    display: block;
+    border-radius: 5px;
+}
+
+.account_Registration{
+	margin-top: 150px;
+	text-align: center;
+	color: #2c3e50;
+	font-weight: bold;
+}
+
+.accountRegistrationButton{
+	background-color: #2c3e50;/* Darkblue */
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    margin: auto;
+    display: block;
+    border-radius: 5px;
+}
+
+.search_edamam{
+text-align: center;
+padding-top: 50px;
+}
+
+.search_Body{
+	background-image: url('http://cdn.images.express.co.uk/img/dynamic/11/590x/veg1-634257.jpg');
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	background-image: opacity(0.5);
+}
+
+
+
+li ::after {
+content: '|';
+padding-left: 25px;
+padding-right: 25px;
+}
+a{
+	text-decoration: none;
+}
+
+.button-Container{
+	padding-top: 10px;
+
+}
+
+.start-Button{
+    background-color: #2c3e50;/* Darkblue */
+    color: white;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: auto;
+    display: block;
+    border-radius: 5px;
+}
+
+
+.saved_recipes{
+	background-color: red;
+	width: 25px;
+	left: 50px;
+}
+
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #3e8e41;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}

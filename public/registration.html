@@ -2,11 +2,12 @@
 <html>
 <head>
 	<title>Registration Page</title>
-	<link rel='stylesheet' href='registration.css'>
+	<link rel='stylesheet' href='registration.css'/>
+	<link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'/>
 </head>
 <body>
 <div class='form_container'>
-<form class='registration_form' method='post'>
+<form class='registration_form'>
 <label for='username'>Username</label>
 <input id='username' type='text'>
 <br>
@@ -19,10 +20,12 @@
 <label for='lastName'>Last Name</label>
 <input id='lastName' type='text'>
 <br>
+<button class='submit_button' type='submit'>Submit</button>
 </form>
 </div>
-<button class='submit_button' type='submit'>Submit</button>
+
 </body>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-<script src='app.js'></script>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+<script src='registration.js'></script>
 </html>

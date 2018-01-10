@@ -34,7 +34,7 @@ router.use(bodyParser.json());
       return done(null, user);
     });
   }
-)); 
+));
 
  router.use(session({
 	secret: 'keyboard cat',
@@ -82,6 +82,7 @@ router.put('/deleteRecipe/', (req,res) => {
 	.findByIdAndUpdate(req.session.passport.user,
 		{$pull: {savedRecipes: {_id: req.body._id}}},
 		(err, user) => {
+      console.log('Deleted!')
 			User.findById(req.session.passport.user, (err, user) => {
 				if(err){
 					res.send(err);
@@ -145,9 +146,9 @@ return User
   	.catch(function(err){
   		res.send(err);
   	})
-    
+
   });
-	
+
 
  router.get('/logout', function(req, res) {
 	req.session.destroy(function (err) {

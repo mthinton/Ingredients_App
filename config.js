@@ -3,4 +3,4 @@ exports.DATABASE_URL = process.env.DATABASE_URL ||
                       'mongodb://Matthew:ingredients1@ds143953.mlab.com:43953/ingredients_users'
 
 
-exports.PORT = 'https://intense-garden-96611.herokuapp.com/';
+exports.PORT = 'process.env.PORT || 8080';

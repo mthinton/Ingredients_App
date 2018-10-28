@@ -1,9 +1,0 @@
-language: node_js
-node_js: node
-deploy:
-  provider: heroku
-  api_key:
-    secure: b9sBfNEdYOp2kc/kJgvNWg6yH5LSF/zN+LC7awXC60iWL0C5fLat+24jhGYFqO5OHDFF6Nm21U9nkp/Jfy9npIVWbi7nWo3Pg29HA5tdHc/1NssItdqhL5UyOzge7M1qEdunXQIKItO7HUrVhz1I9DyUNVidsuAoLH6UR8IvXNJovi2rZXeoma4qM2GqfBO6j3BU/bBCogn+3uq5tJ08Whu+NZkuYBn/dlCTV1mJ1OtiwmzAg9fgPsfVBbgRWGRS6ZWszyO8+FxpHTyo1qBS69v5qOuK38YI0y3pGxn7PkKVA/UwwwbxvxkRNerItd+W7fzBcm1BmBmv85sWqlsWQ6miclfg2bkN8e7e2ZEK6L5OpC+YcS30XMCZdFOCtvwCm412vEulz5jTJFkz0R4YZ0y43Qjf/kO1iYPs6JElxBaSw8Qzz2aGdM7mcNgnZAjVvTmNqBffd91Ic+7vcFIi6k4Tv2a+hkkRko1cIcFu+NDBWBRdNE2/YKdipSjkXmlP27TrnJ3W8JmHMyod/ofiUcqoMx10vyIvuA8wMBD0AtobYxZL6Dc8re9FRpQstIDbMYGxR1HDyTYcoGotk29wxUnG4JuZIxPNikUB+zFnEsgxExVivQ0oeTlB9AoLXnHl5ZMLdjxLhJz4/+BTwYCBiHQ14NhY3eNMEItop23bHrA=
-  app: aqueous-everglades-73770
-  on:
-    repo: mthintoncoding/Ingredients_App

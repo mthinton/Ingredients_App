@@ -10,7 +10,7 @@ const {User} = require('./Users/models');
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(DATABASE_URL)
+mongoose.createConnection(DATABASE_URL)
 //connected using mongoose and used mongoose as schema
 
 const app = express();
